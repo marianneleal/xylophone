@@ -6,6 +6,20 @@ void main() => runApp(const XylophoneApp());
 class XylophoneApp extends StatelessWidget {
   const XylophoneApp({Key? key}) : super(key: key);
 
+  Expanded buildKey(int soundNumber, String noteName, Color keyColor) {
+    return Expanded(
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(keyColor),
+        ),
+        onPressed: () {
+          playSound(soundNumber);
+        },
+        child: Text(noteName),
+      ),
+    );
+  }
+
   void playSound(int soundNumber) {
     final player = AudioCache();
     player.play('note$soundNumber.wav');
@@ -21,90 +35,13 @@ class XylophoneApp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
-                    ),
-                    onPressed: () {
-                      playSound(7);
-                    },
-                    child: const Text('H'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.orange),
-                    ),
-                    onPressed: () {
-                      playSound(6);
-                    },
-                    child: const Text('A'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.yellow),
-                    ),
-                    onPressed: () {
-                      playSound(5);
-                    },
-                    child: const Text('G'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green),
-                    ),
-                    onPressed: () {
-                      playSound(4);
-                    },
-                    child: const Text('F'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.teal),
-                    ),
-                    onPressed: () {
-                      playSound(3);
-                    },
-                    child: const Text('E'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
-                    ),
-                    onPressed: () {
-                      playSound(2);
-                    },
-                    child: const Text('D'),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.purple),
-                    ),
-                    onPressed: () {
-                      playSound(1);
-                    },
-                    child: const Text('C'),
-                  ),
-                ),
+                buildKey(7, 'H', Colors.red),
+                buildKey(6, 'A', Colors.orange),
+                buildKey(5, 'G', Colors.yellow),
+                buildKey(4, 'F', Colors.green),
+                buildKey(3, 'E', Colors.teal),
+                buildKey(2, 'D', Colors.blue),
+                buildKey(1, 'C', Colors.purple),
               ],
             ),
           ),
